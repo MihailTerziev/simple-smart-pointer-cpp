@@ -1,6 +1,6 @@
 # simple-smart-pointer-cpp
 This is simple implementation of a smart pointer class. It allows save usage of dynamic memory allocation. The class encapsulates raw pointer logic and deallocates resources automatically. Instances can be copyied, copy-assigned, moved and move-assigned so that working with them would be flexible and convenient for the user.
 
-However, dynamic instantiating of the class should not be done, as there will be memory leak if the user doesn't call the destructor manually. Purpose of the class is to encapsulate pointer to dynamic memory and free it when not needed anymore, so it should be located on the stack. That way the compiler takes care of everything, otherwise pointer to pointer logic would be redundant.
+However, dynamic instantiating of the class should not be done, as there will be memory leak if the user doesn't call the destructor manually. Purpose of the class is to encapsulate pointer to dynamic memory and free it when not needed anymore, so it should be located on the stack. That way the compiler takes care of everything, otherwise pointer to pointer logic would be redundant and unsafe.
 
-I hope you like it!
+The smart pointer knows when a copy is made. Making a copy means another instance of the class in which the encapsulated pointer points to the same chunk of memory as the original's one pointer. So when the compiler calls the destructor of the original's instance, it will deallocate only the orignal's pointer and will do nothing when the destructor of a copy is called, so that second deallocation of already freed memory, which will cause memory leak, can't be done.
