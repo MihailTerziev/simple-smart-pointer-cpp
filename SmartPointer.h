@@ -33,7 +33,7 @@ template<typename T> class SmartPointer {
 
         void __dealloc() {
             if (mPtr != nullptr)
-			    delete mPtr;
+		delete mPtr;
         }
 
     public:
@@ -126,7 +126,7 @@ template<typename T> class SmartPointer<T[]> {
 
         void __dealloc() {
             if (mPtr != nullptr)
-			    delete[] mPtr;
+		delete[] mPtr;
         }
 
     public:
@@ -190,11 +190,11 @@ template<typename T> class SmartPointer<T[]> {
         }    
 
         T& operator[](const int& index) {
-		    if(index < 0)
-		        throw std::runtime_error("Memory_Access_Violation: Negative index out of bound!");
+	    if(index < 0)
+		throw std::runtime_error("Memory_Access_Violation: Negative index out of bound!");
 
-		    return mPtr[index];
-	    }
+	    return mPtr[index];
+	}
 };
 
 #endif  // SMART_POINTER_H_
