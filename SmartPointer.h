@@ -3,7 +3,6 @@
 
 #include <stdexcept>
 
-
 template<typename T> class SmartPointer {
     private:
         enum PointerType {
@@ -51,7 +50,8 @@ template<typename T> class SmartPointer {
                 __dealloc();
         }
 
-        SmartPointer(const SmartPointer& other) : mPtr(other.mPtr), mType(other.mType), mIsCopy(true) {}
+        SmartPointer(const SmartPointer& other) :
+	    mPtr(other.mPtr), mType(other.mType), mIsCopy(true) {}
 
         SmartPointer& operator=(const SmartPointer& other) {
             if (this != &other) {
