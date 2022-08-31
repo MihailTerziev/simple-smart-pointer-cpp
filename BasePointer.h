@@ -123,11 +123,11 @@ template<typename T> class BasePointer<T[]> {
         }
 
         T& operator[](const int& index) {
-		    if(index < 0)
-		        throw std::runtime_error("Memory_Access_Violation: Negative index out of bound!");
+	    if (index < 0)
+	        throw std::runtime_error("Memory_Access_Violation: Negative index out of bound!");
 
-		    return mPointer[index];
-	    }
+	    return mPointer[index];
+	}
 
         void operator++(int) {
             mPointer++;
@@ -147,4 +147,4 @@ template<typename T> class BasePointer<T[]> {
             virtual void dealloc() = 0;
 };
 
-#endif // BASE_POINTER_H_
+#endif  // BASE_POINTER_H_
