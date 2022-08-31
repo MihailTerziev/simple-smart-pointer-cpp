@@ -32,7 +32,7 @@ template<typename T> class SmartPointer {
 
         void __dealloc() {
             if (mPtr != nullptr)
-		delete mPtr;
+			    delete mPtr;
         }
 
     public:
@@ -45,13 +45,15 @@ template<typename T> class SmartPointer {
         SmartPointer(std::nullptr_t) :
             mPtr(nullptr), mType(PointerType::NULLP), mIsCopy(false) {}
 
+        // добави констуктор за наследник
+
         ~SmartPointer() {
             if (!mIsCopy)
                 __dealloc();
         }
 
         SmartPointer(const SmartPointer& other) :
-	    mPtr(other.mPtr), mType(other.mType), mIsCopy(true) {}
+            mPtr(other.mPtr), mType(other.mType), mIsCopy(true) {}
 
         SmartPointer& operator=(const SmartPointer& other) {
             if (this != &other) {
@@ -126,7 +128,7 @@ template<typename T> class SmartPointer<T[]> {
 
         void __dealloc() {
             if (mPtr != nullptr)
-		delete[] mPtr;
+			    delete[] mPtr;
         }
 
     public:
@@ -190,11 +192,44 @@ template<typename T> class SmartPointer<T[]> {
         }    
 
         T& operator[](const int& index) {
-	    if(index < 0)
-		throw std::runtime_error("Memory_Access_Violation: Negative index out of bound!");
+		    if(index < 0)
+		        throw std::runtime_error("Memory_Access_Violation: Negative index out of bound!");
 
-	    return mPtr[index];
-	}
+		    return mPtr[index];
+	    }
+
+        void operator++(int) {
+            mPtr++;
+        }
+
+        void operator--(int) {
+            mPtr--;
+        }
 };
 
 #endif  // SMART_POINTER_H_
+
+// void __swap(SmartPointer& other) {
+//     T* temp = mPtr;
+//     mPtr = other.mPtr;
+//     other.mPtr = temp;
+// }
+
+// T* release() {
+//     T* temp = mPtr;
+//     mPtr = nullptr;
+
+//     return temp;
+// }
+
+// template<typename T1> SmartPointer(SmartPointer<T1>&& derived) {
+//     SmartPointer<T> temp(derived.release());
+//     temp.__swap(*this);
+// }
+
+// template<typename T1> SmartPointer& operator=(SmartPointer<T>&& derived) {
+//     SmartPointer<T> temp(derived.release());
+//     temp.__swap(*this);
+
+//     return *this;
+// }
