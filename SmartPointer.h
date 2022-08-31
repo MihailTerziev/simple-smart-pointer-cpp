@@ -192,7 +192,7 @@ template<typename T> class SmartPointer<T[]> {
         }    
 
         T& operator[](const int& index) {
-	    if(index < 0)
+	    if (index < 0)
 	        throw std::runtime_error("Memory_Access_Violation: Negative index out of bound!");
 
 	    return mPtr[index];
