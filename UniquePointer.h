@@ -5,6 +5,8 @@
 
 template<typename T> class UniquePointer : public BasePointer<T> {
     private:
+        void* operator new(size_t) = delete;
+    
         void reset(UniquePointer& other) {
             other.set(nullptr);
             other.setType(BasePointer<T>::PointerType::NULLP);
@@ -53,6 +55,8 @@ template<typename T> class UniquePointer : public BasePointer<T> {
 
 template<typename T> class UniquePointer<T[]> : public BasePointer<T[]> {
     private:
+        void* operator new[](size_t) = delete;
+    
         void reset(UniquePointer& other) {
             other.set(nullptr);
             other.setType(BasePointer<T[]>::PointerType::NULLP);
