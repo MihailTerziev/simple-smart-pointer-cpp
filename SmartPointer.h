@@ -3,9 +3,10 @@
 
 #include <stdexcept>
 
-
 template<typename T> class SmartPointer {
     private:
+	void* operator new(size_t) = delete;
+	
         enum PointerType {
             ALLOC,
             NULLP
@@ -100,6 +101,8 @@ template<typename T> class SmartPointer {
 
 template<typename T> class SmartPointer<T[]> {
     private:
+	void* operator new[](size_t) = delete;
+	
         enum PointerType {
             ALLOC,
             NULLP
